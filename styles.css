@@ -1,5 +1,5 @@
 :root {
-  color-scheme: dark;
+  color-scheme: light;
   --bg-start: #0ab9c2;
   --bg-mid: #126fe7;
   --bg-end: #021264;
@@ -11,7 +11,7 @@
   --accent-2: #6d83a3;
   --accent-3: #4c688d;
   --border: rgba(146, 168, 199, 0.35);
-  --shadow: rgba(2, 8, 23, 0.65);
+  --shadow: rgba(16, 45, 119, 0.65);
 }
 
 * {
