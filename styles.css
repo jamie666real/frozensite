@@ -1,563 +1,180 @@
 :root {
-  --deep-ocean: #145d7c;
-  --arctic-blue: #203a43;
-  --glacier-blue: #2c5364;
-  --ice-blue: #a8dadc;
-  --frost-white: #f1faee;
-  --crystal-clear: rgba(255, 255, 255, 0.15);
-  --shimmer: rgba(255, 255, 255, 0.4);
+  /* Color Palette */
+  --color-abyssal-blue: #0b192c;
+  --color-deep-water: #1e3e62;
+  --color-glacial-cyan: #008dda;
+  --color-ice-blue: #41c9e2;
+  --color-frost-white: #f7e7e7; /* Soft cool white */
+  --color-pure-ice: #ffffff;
+  
+  /* Glassmorphism Effects */
+  --bg-glass: rgba(255, 255, 255, 0.06);
+  --border-glass: rgba(255, 255, 255, 0.15);
+  --shadow-ice: 0 8px 32px 0 rgba(0, 141, 218, 0.2);
+  --blur-ice: blur(12px);
+
+  /* Typography */
+  --font-primary: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
+/* ==========================================================================
+   2. BASE STYLES & BACKGROUND
+   ========================================================================== */
 * {
   box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, var(--deep-ocean), var(--arctic-blue), var(--glacier-blue));
-  background-size: 400% 400%;
-  animation: waterFlow 15s ease infinite;
-  color: var(--frost-white);
+  font-family: var(--font-primary);
+  color: var(--color-frost-white);
   min-height: 100vh;
   line-height: 1.6;
+  
+  /* Deep water to frozen ice gradient background */
+  background: linear-gradient(
+    135deg, 
+    var(--color-abyssal-blue) 0%, 
+    var(--color-deep-water) 50%, 
+    var(--color-glacial-cyan) 100%
+  );
+  background-attachment: fixed;
+  overflow-x: hidden;
+}
+
+/* ==========================================================================
+   3. TYPOGRAPHY
+   ========================================================================== */
+h1, h2, h3, h4 {
+  font-weight: 700;
+  color: var(--color-pure-ice);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+h1 {
+  font-size: 2.5rem;
+  /* Frozen ice text effect */
+  text-shadow: 0 0 10px rgba(65, 201, 226, 0.6), 0 0 20px rgba(65, 201, 226, 0.3);
+}
+
+h2 {
+  font-size: 1.8rem;
+  border-bottom: 2px solid rgba(65, 201, 226, 0.3);
+  padding-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+p {
+  color: rgba(247, 231, 231, 0.85);
+  margin-bottom: 1rem;
+}
+
+/* ==========================================================================
+   4. LAYOUT COMPONENTS (Glassmorphism "Ice" Panels)
+   ========================================================================== */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
   padding: 2rem;
 }
 
-a {
-  color: inherit;
+/* Use this class for cards, sections, or main content blocks */
+.ice-card {
+  background: var(--bg-glass);
+  backdrop-filter: var(--blur-ice);
+  -webkit-backdrop-filter: var(--blur-ice);
+  border: 1px solid var(--border-glass);
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: var(--shadow-ice);
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-img {
-  max-width: 100%;
-  display: block;
+.ice-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(65, 201, 226, 0.4);
+  box-shadow: 0 12px 40px 0 rgba(65, 201, 226, 0.3);
 }
 
-@keyframes waterFlow {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
+/* Navigation Bar */
 .navbar {
+  background: rgba(11, 25, 44, 0.7);
+  backdrop-filter: var(--blur-ice);
+  -webkit-backdrop-filter: var(--blur-ice);
+  border-bottom: 1px solid var(--border-glass);
+  padding: 1rem 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.2rem 2rem;
-  max-width: 1100px;
-  margin: 0 auto;
-  gap: 1rem;
-  flex-wrap: wrap;
 }
 
-.brand {
-  color: var(--text);
-  text-decoration: none;
-  font-size: 1.3rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-shadow: 0 4px 16px var(--shadow);
-}
-
-.nav-links {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
-
-.nav-links a {
-  color: var(--muted);
+/* ==========================================================================
+   5. INTERACTIVE ELEMENTS
+   ========================================================================== */
+/* Links */
+a {
+  color: var(--color-ice-blue);
   text-decoration: none;
   transition: color 0.2s ease;
 }
 
-.nav-links a:hover {
-  color: var(--text);
+a:hover {
+  color: var(--color-pure-ice);
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
 }
 
-.hero {
-  min-height: 100vh;
-  background: radial-gradient(circle at top, rgb(0, 255, 217), transparent 45%);
-}
-
-.hero-content {
-  max-width: 760px;
-  margin: 0 auto;
-  padding: 5rem 1.5rem 4rem;
-  text-align: center;
-}
-
-.eyebrow {
-  text-transform: uppercase;
-  letter-spacing: 0.25em;
-  color: var(--accent);
-  font-size: 0.85rem;
-  margin-bottom: 0.5rem;
-  font-weight: 700;
-}
-
-.hero h1 {
-  font-size: clamp(2.2rem, 5vw, 3.8rem);
-  margin: 0 0 1rem;
-  text-shadow: 0 6px 20px var(--shadow);
-}
-
-.hero p {
-  color: var(--muted);
-  font-size: 1.05rem;
-}
-
-.hero-actions {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  flex-wrap: wrap;
-  margin-top: 1.75rem;
-}
-
-button, .btn {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.05));
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  color: #ffffff;
-  padding: 0.8rem 1.8rem;
+/* Frozen / Glowing Buttons */
+.btn-glacier {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--color-glacial-cyan), var(--color-ice-blue));
+  color: var(--color-pure-ice);
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border: none;
   border-radius: 8px;
   cursor: pointer;
-  font-weight: 600;
-  letter-spacing: 0.5px;
+  box-shadow: 0 4px 15px rgba(0, 141, 218, 0.4);
   transition: all 0.3s ease;
-  backdrop-filter: blur(4px);
 }
 
-button:hover, .btn:hover {
-  background: var(--shimmer);
-  box-shadow: 0 0 15px rgba(168, 218, 220, 0.5);
-  transform: translateY(-2px);
-  border-color: var(--ice-blue);
+.btn-glacier:hover {
+  background: linear-gradient(135deg, var(--color-ice-blue), var(--color-glacial-cyan));
+  box-shadow: 0 6px 20px rgba(65, 201, 226, 0.6);
+  transform: scale(1.02);
 }
 
-button:active, .btn:active {
-  transform: translateY(0);
+/* Inputs / Form Fields */
+input, textarea {
+  background: rgba(11, 25, 44, 0.5);
+  border: 1px solid var(--border-glass);
+  border-radius: 6px;
+  color: var(--color-pure-ice);
+  padding: 0.75rem;
+  width: 100%;
+  transition: all 0.3s ease;
 }
 
+input:focus, textarea:focus {
+  outline: none;
+  border-color: var(--color-ice-blue);
+  box-shadow: 0 0 10px rgba(65, 201, 226, 0.5);
+}
+
+/* Scrollbar customization for a fluid, watery look */
 ::-webkit-scrollbar {
   width: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--deep-ocean);
+  background: var(--color-abyssal-blue);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(var(--glacier-blue), var(--ice-blue));
+  background: linear-gradient(var(--color-deep-water), var(--color-ice-blue));
   border-radius: 5px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #ffffff;
-}
-
-.server-info {
-  margin-top: 1.5rem;
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  flex-wrap: wrap;
-  color: var(--muted);
-  align-items: center;
-}
-
-.status-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.55rem;
-  padding: 0.45rem 0.8rem;
-  border-radius: 999px;
-  font-weight: 700;
-  border: 1px solid var(--border);
-  background: rgba(255, 255, 255, 0.06);
-}
-
-.status-pill.online {
-  color: #dcfce7;
-  border-color: rgba(34, 197, 94, 0.35);
-}
-
-.status-pill.offline {
-  color: #fee2e2;
-  border-color: rgba(239, 68, 68, 0.35);
-}
-
-.status-dot {
-  width: 0.7rem;
-  height: 0.7rem;
-  border-radius: 50%;
-  background: var(--accent-3);
-  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.08);
-}
-
-main {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 2rem 1.25rem 4rem;
-}
-
-.info-grid {
-  display: grid;
-  gap: 1rem;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-}
-
-.card,
-.panel,
-.auth-card,
-.discord-card,
-.profile-card,
-.rank-card,
-.staff-card {
-  background: linear-gradient(135deg, rgba(16, 24, 39, 0.96), rgba(33, 46, 68, 0.92));
-  border: 1px solid var(--border);
-  border-radius: 18px;
-  padding: 1.4rem;
-  box-shadow: 0 18px 40px var(--shadow), inset 0 1px 0 rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(16px);
-}
-
-.card h2,
-.panel h1,
-.rank-card h2,
-.staff-card h2 {
-  margin-top: 0;
-}
-
-.card a {
-  color: var(--text);
-  font-weight: 700;
-  text-decoration: none;
-}
-
-.page-header {
-  margin-bottom: 1.5rem;
-}
-
-.page-header p {
-  color: var(--muted);
-}
-
-.ranks-grid,
-.staff-list,
-.report-grid {
-  display: grid;
-  gap: 1rem;
-}
-
-.ranks-grid {
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-}
-
-.rank-card .price {
-  color: var(--text);
-  font-size: 1.2rem;
-  font-weight: 700;
-}
-
-.staff-list {
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-}
-
-.staff-card .role {
-  color: var(--text);
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  font-size: 0.8rem;
-}
-
-form {
-  display: grid;
-  gap: 0.9rem;
-}
-
-label {
-  display: grid;
-  gap: 0.35rem;
-  font-weight: 600;
-}
-
-input,
-select,
-textarea {
-  width: 100%;
-  padding: 0.8rem 0.95rem;
-  border-radius: 10px;
-  border: 1px solid var(--border);
-  background: var(--panel-2);
-  color: var(--text);
-}
-
-textarea {
-  min-height: 120px;
-  resize: vertical;
-}
-
-button {
-  border: none;
-  cursor: pointer;
-  padding: 0.9rem 1.15rem;
-  border-radius: 999px;
-  background: linear-gradient(90deg, var(--accent), var(--accent-2));
-  color: #111827;
-  font-weight: 700;
-  box-shadow: 0 10px 24px rgba(2, 8, 23, 0.25);
-}
-
-.button.small {
-  padding: 0.55rem 0.85rem;
-  font-size: 0.9rem;
-}
-
-.auth-controls {
-  display: flex;
-  gap: 0.5rem;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-.auth-grid,
-.discord-grid,
-.profile-grid {
-  display: grid;
-  gap: 1rem;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-}
-
-.status-message {
-  min-height: 1.5rem;
-  color: #fff7ed;
-  font-weight: 600;
-}
-
-.profile-picture {
-  width: 96px;
-  height: 96px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid var(--border);
-  margin-bottom: 0.75rem;
-  box-shadow: 0 10px 25px var(--shadow);
-}
-
-.message-list {
-  display: grid;
-  gap: 0.65rem;
-  margin-top: 1rem;
-}
-
-.message-pill {
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  padding: 0.6rem 0.8rem;
-  background: rgba(255, 255, 255, 0.08);
-  color: var(--text);
-}
-
-.discord-shell {
-  display: grid;
-  grid-template-columns: 220px minmax(0, 1fr);
-  min-height: 560px;
-  border-radius: 24px;
-  overflow: hidden;
-  border: 1px solid rgba(6, 182, 212, 0.35);
-  box-shadow: 0 22px 40px rgba(2, 8, 23, 0.35);
-  background: #111827;
-}
-
-.discord-sidebar {
-  background: linear-gradient(180deg, #0f172a, #111827);
-  padding: 1rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.9rem;
-  border-right: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.discord-server-pill {
-  padding: 0.75rem 0.9rem;
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.07);
-  font-weight: 700;
-  color: var(--text);
-}
-
-.discord-server-pill.small {
-  font-size: 0.9rem;
-  color: #cbd5e1;
-}
-
-.discord-channel-list {
-  display: grid;
-  gap: 0.35rem;
-}
-
-.channel {
-  padding: 0.65rem 0.75rem;
-  border-radius: 10px;
-  color: #94a3b8;
-  font-weight: 600;
-}
-
-.channel.active {
-  background: rgba(6, 182, 212, 0.2);
-  color: #fff;
-}
-
-.discord-chat {
-  display: flex;
-  flex-direction: column;
-  background: linear-gradient(180deg, #1f2937, #111827);
-}
-
-.discord-chat-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 1rem;
-  padding: 1rem 1.1rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.discord-chat-header strong {
-  color: #fff;
-}
-
-.discord-chat-header p {
-  margin: 0.2rem 0 0;
-  color: #94a3b8;
-  font-size: 0.92rem;
-}
-
-.discord-messages {
-  flex: 1;
-  overflow: auto;
-  padding: 1rem 1.1rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.8rem;
-  background: radial-gradient(circle at top, rgba(6, 182, 212, 0.16), transparent 45%);
-}
-
-.message-group {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.7rem;
-}
-
-.message-group.self {
-  justify-content: flex-end;
-}
-
-.message-group.self .message-bubble {
-  background: linear-gradient(90deg, rgba(6, 182, 212, 0.95), rgba(250, 204, 21, 0.9));
-  color: #0f172a;
-}
-
-.message-group.self .message-meta {
-  color: #0f172a;
-}
-
-.message-group.self .message-meta strong {
-  color: #0f172a;
-}
-
-.avatar {
-  width: 2.45rem;
-  height: 2.45rem;
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  font-weight: 800;
-  color: #0f172a;
-  background: linear-gradient(135deg, var(--accent), var(--accent-3));
-  flex-shrink: 0;
-}
-
-.message-bubble {
-  padding: 0.8rem 0.9rem;
-  border-radius: 14px;
-  background: #232b3d;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
-  max-width: min(92%, 520px);
-}
-
-.message-meta {
-  display: flex;
-  gap: 0.45rem;
-  align-items: center;
-  margin-bottom: 0.35rem;
-  color: #94a3b8;
-  font-size: 0.8rem;
-}
-
-.message-meta strong {
-  color: #fff;
-  font-size: 0.9rem;
-}
-
-.message-bubble p {
-  margin: 0;
-  color: #e2e8f0;
-}
-
-.discord-composer {
-  padding: 1rem 1.1rem 1.1rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.discord-composer textarea {
-  min-height: 90px;
-  background: #0f172a;
-  border-color: rgba(255, 255, 255, 0.08);
-}
-
-.composer-actions {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 0.7rem;
-}
-
-.discord-footer {
-  margin-top: 1rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
-}
-
-.discord-helper {
-  margin: 0;
-  color: #fde68a;
-  font-size: 0.95rem;
-}
-
-@media (max-width: 900px) {
-  .discord-shell {
-    grid-template-columns: 1fr;
-  }
-
-  .discord-sidebar {
-    border-right: none;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  }
-}
-
-@media (max-width: 700px) {
-  .navbar {
-    flex-direction: column;
-    gap: 0.75rem;
-  }
-
-  .hero-content {
-    padding-top: 3rem;
-  }
 }
